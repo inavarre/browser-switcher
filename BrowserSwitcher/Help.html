@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>BrowserSwitcher Help</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --card: #f5f5f7;
+    --border: rgba(0, 0, 0, 0.08);
+    --pink: #e0306f;
+    --turquoise: #0b9fb1;
+    --code: rgba(0, 0, 0, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1e1e20;
+      --text: #f5f5f7;
+      --muted: #a1a1a6;
+      --card: #2a2a2d;
+      --border: rgba(255, 255, 255, 0.08);
+      --pink: #ff62aa;
+      --turquoise: #2de2d0;
+      --code: rgba(255, 255, 255, 0.08);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 28px 32px 48px;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  header svg { flex: none; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+  .lede { color: var(--muted); margin: 4px 0 18px; }
+  a { color: var(--pink); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  nav a {
+    color: var(--text); text-decoration: none; font-size: 12.5px;
+    padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--border);
+  }
+  nav a:hover { border-color: var(--pink); }
+  section { padding-top: 22px; }
+  h2 { font-size: 17px; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  h2 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--turquoise); }
+  section:nth-of-type(even) h2 .dot { background: var(--pink); }
+  h3 { font-size: 14px; margin: 16px 0 4px; }
+  p { margin: 6px 0; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 4px 14px; margin: 10px 0; }
+  dl { margin: 0; }
+  dl > div { padding: 9px 0; border-bottom: 1px solid var(--border); }
+  dl > div:last-child { border-bottom: none; }
+  dt { font-weight: 600; }
+  dd { margin: 2px 0 0; color: var(--muted); }
+  ol, ul { padding-left: 20px; margin: 6px 0; }
+  li { margin: 3px 0; }
+  code, kbd {
+    font: 12.5px ui-monospace, "SF Mono", Menlo, monospace;
+    background: var(--code); border-radius: 4px; padding: 1px 5px;
+  }
+  kbd { border: 1px solid var(--border); }
+  .flow { display: grid; gap: 6px; margin: 10px 0; }
+  .flow div { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; }
+  .flow b { color: var(--pink); margin-right: 6px; }
+  .note { border-left: 3px solid var(--turquoise); padding: 6px 12px; margin: 10px 0; background: var(--card); border-radius: 0 8px 8px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true">
+    <rect x="2" y="2" width="96" height="96" rx="22" fill="#1b1833"/>
+    <path d="M50 70 V56 C50 44 30 46 30 30" stroke="#2de2d0" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M50 70 V56 C50 44 70 46 70 30" stroke="#ff62aa" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M50 78 V56" stroke="#f7f5ff" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="30" cy="28" r="9" fill="#2de2d0"/><circle cx="30" cy="28" r="3.5" fill="#1b1833"/>
+    <circle cx="70" cy="28" r="9" fill="#ff62aa"/><circle cx="70" cy="28" r="3.5" fill="#1b1833"/>
+  </svg>
+  <div>
+    <h1>BrowserSwitcher Help</h1>
+  </div>
+</header>
+<p class="lede">Open links in your work browser during work hours and your personal browser the rest of the time, with rules and a quick prompt for exceptions.</p>
+
+<nav>
+  <a href="#how">How it works</a>
+  <a href="#start">Getting started</a>
+  <a href="#menubar">Menu bar</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#prompt">Prompt</a>
+  <a href="#rules">Rules</a>
+  <a href="#general">General</a>
+  <a href="#troubleshooting">Troubleshooting</a>
+</nav>
+
+<section id="how">
+  <h2><span class="dot"></span>How it works</h2>
+  <p>BrowserSwitcher becomes your Mac's default browser, but it never shows web pages itself. Every link you click in another app (Mail, Slack, Notes…) goes to BrowserSwitcher first, which immediately forwards it to the right real browser.</p>
+  <p>For each link it checks three things, in this order, and the first one that applies wins:</p>
+  <div class="flow">
+    <div><b>1</b>Are you holding the <a href="#prompt">prompt key</a>? → show the browser prompt.</div>
+    <div><b>2</b>Does a <a href="#rules">rule</a> match? → open in that rule's browser, or show the prompt.</div>
+    <div><b>3</b>Otherwise, use the <a href="#schedule">schedule</a> → work browser during work hours, personal browser the rest of the time.</div>
+  </div>
+  <p>Links are opened unchanged: nothing is removed from or added to the address.</p>
+</section>
+
+<section id="start">
+  <h2><span class="dot"></span>Getting started</h2>
+  <ol>
+    <li>Open <b>Settings</b> (menu-bar icon → <b>Settings…</b>, or open BrowserSwitcher again from Applications).</li>
+    <li>On the <b>Schedule</b> tab, choose your work and personal browsers, your work hours and work days.</li>
+    <li>Click <b>Make Default Browser…</b> (menu-bar panel or <b>General</b> tab) and confirm in the macOS dialog. You only do this once.</li>
+    <li>Click a link in another app to check it opens where you expect.</li>
+  </ol>
+</section>
+
+<section id="menubar">
+  <h2><span class="dot"></span>Menu-bar panel</h2>
+  <p>Click the branch icon in the menu bar.</p>
+  <div class="card"><dl>
+    <div><dt>Status card</dt><dd>The browser links go to right now, and whether it's work hours (with the end time) or personal time. It updates on its own.</dd></div>
+    <div><dt>Not your default browser yet</dt><dd>Shown until BrowserSwitcher is the default. Links aren't routed until you click <b>Make Default Browser…</b> and confirm.</dd></div>
+    <div><dt>Choose your work and personal browsers</dt><dd>Shown when either browser isn't set or isn't installed.</dd></div>
+    <div><dt>Work hours schedule</dt><dd>Same switch as on the Schedule tab. Turn it off to send everything to your personal browser, for example on a day off.</dd></div>
+    <div><dt>Launch at login</dt><dd>Starts BrowserSwitcher when you log in, so the menu-bar icon is always there.</dd></div>
+    <div><dt>Test Link</dt><dd>Sends <code>https://example.com</code> through the same three steps as a real link, so you can see where links go right now. Hold the prompt key while clicking to test the prompt. It doesn't prove BrowserSwitcher is the default browser, and app rules don't apply to it (the click comes from BrowserSwitcher itself).</dd></div>
+    <div><dt>Help · Settings… · Quit</dt><dd>This page, the Settings window, and quitting the app. While it's quit, macOS starts it again automatically when you click a link.</dd></div>
+  </dl></div>
+</section>
+
+<section id="schedule">
+  <h2><span class="dot"></span>Schedule</h2>
+  <div class="card"><dl>
+    <div><dt>Work browser</dt><dd>Where links open during work hours. Browsers with several profiles (Chrome, Brave, Edge) list each profile, such as <b>Google Chrome — Work</b>, so links open in that profile.</dd></div>
+    <div><dt>Personal browser</dt><dd>Where links open outside work hours, on days you haven't selected, and whenever the schedule is off. Pick a profile here too. Plain <b>Google Chrome — last-used profile</b> opens in whichever Chrome profile you used most recently, which may be your work one.</dd></div>
+    <div><dt>Use work browser during work hours</dt><dd>Turns the schedule on or off. When off, links always go to your personal browser (rules and the prompt still work).</dd></div>
+    <div><dt>Starts / Ends</dt><dd>The work-hours window. A link at exactly the start time counts as work; at exactly the end time it counts as personal. Overnight ranges work too, e.g. <code>22:00</code> to <code>06:00</code>.</dd></div>
+    <div><dt>Days</dt><dd>The days work hours apply. Highlighted days are on. The day is the one you click the link on.</dd></div>
+  </dl></div>
+  <div class="note">If the browser the schedule picks isn't installed, the link opens in your other chosen browser, and failing that, Safari. A link is never dropped.</div>
+</section>
+
+<section id="prompt">
+  <h2><span class="dot"></span>Prompt</h2>
+  <p>The prompt is a small window that lets you pick a browser for a single link. It appears when you hold the prompt key while clicking a link, or when a rule says <b>Show prompt</b>.</p>
+  <div class="card"><dl>
+    <div><dt>Show the browser prompt while a key is held</dt><dd>Turns the prompt key on or off. Holding the key beats every rule and the schedule.</dd></div>
+    <div><dt>Key</dt><dd><b>Fn (Globe)</b>, <b>Option</b>, <b>Shift</b>, <b>Control</b> or <b>Command</b>. If Fn doesn't work on your keyboard, choose Option. Note that some apps use Command-click or Option-click for their own actions.</dd></div>
+  </dl></div>
+  <h3>Choosing what the prompt shows</h3>
+  <div class="card"><dl>
+    <div><dt>Browsers in the prompt</dt><dd>One switch per entry on the <b>Prompt</b> tab. Turn off anything you never pick. Terminal and iTerm start out turned off because they aren't browsers.</dd></div>
+    <div><dt>Profiles</dt><dd>Chrome, Brave and Edge get one entry per profile when you have more than one, labelled with the profile's name and badged with its picture. Picking one opens the link in that profile's window.</dd></div>
+    <div><dt>What isn't listed</dt><dd>Only apps installed in Applications (and Safari) appear. Copies in the Trash, old updater copies and test browsers downloaded by developer tools such as Puppeteer or Playwright are skipped, everywhere in BrowserSwitcher.</dd></div>
+  </dl></div>
+  <h3>Using the prompt</h3>
+  <table>
+    <tr><th>To</th><th>Do this</th></tr>
+    <tr><td>Open in a browser</td><td>Click it, or press its number <kbd>1</kbd>–<kbd>9</kbd>. Entries after the ninth wrap onto a second row and are click-only.</td></tr>
+    <tr><td>Open in the highlighted browser</td><td><kbd>Return</kbd>. The highlight is the browser you last picked in the prompt.</td></tr>
+    <tr><td>Cancel</td><td><kbd>Esc</kbd>, or click outside the prompt. The link isn't opened.</td></tr>
+  </table>
+</section>
+
+<section id="rules">
+  <h2><span class="dot"></span>Rules</h2>
+  <p>Rules handle exceptions to the schedule. For example, always open GitHub in your work browser, or always ask which browser to use for links clicked in Slack.</p>
+
+  <h3>Creating a rule</h3>
+  <ol>
+    <li>Open <b>Settings → Rules</b> and click <b>Add Rule</b>.</li>
+    <li>Give it a name (optional, for your own reference).</li>
+    <li>Fill in <b>Clicked in</b>, <b>Link host</b>, or both.</li>
+    <li>Choose what <b>Open in</b> does: a specific browser or browser profile, or <b>Show prompt</b>.</li>
+  </ol>
+  <p>Changes save immediately; there's no Save button.</p>
+
+  <h3>Rule settings</h3>
+  <div class="card"><dl>
+    <div><dt>Checkbox</dt><dd>Turns the rule on or off without deleting it. Turned-off rules are dimmed.</dd></div>
+    <div><dt>Clicked in</dt><dd>The app the link was clicked in. Use the app menu next to the field to pick from apps that are running, or type the app's bundle ID. Leave it empty for any app.</dd></div>
+    <div><dt>Link host</dt><dd>The website part of the link, such as <code>github.com</code>. Leave it empty for any site. Only the host is checked, not the rest of the address.</dd></div>
+    <div><dt>Open in</dt><dd>A browser, a specific profile of a browser (such as <b>Google Chrome — Personal</b>), or <b>Show prompt</b> to choose each time.</dd></div>
+    <div><dt>⋯ menu</dt><dd><b>Move Up</b>, <b>Move Down</b> and <b>Delete Rule</b>.</dd></div>
+  </dl></div>
+
+  <h3>How rules match</h3>
+  <ul>
+    <li>Rules are checked <b>top to bottom</b> and the <b>first match wins</b>, so put specific rules above general ones.</li>
+    <li>If you fill in both <b>Clicked in</b> and <b>Link host</b>, <b>both</b> must match.</li>
+    <li>A rule needs at least one of the two. An empty rule never matches.</li>
+    <li>If the matching rule's browser isn't installed, the link follows the schedule.</li>
+    <li>Holding the prompt key always overrides rules.</li>
+  </ul>
+
+  <h3>Link host patterns</h3>
+  <table>
+    <tr><th>Pattern</th><th>Matches</th><th>Doesn't match</th></tr>
+    <tr><td><code>github.com</code></td><td>github.com, gist.github.com</td><td>notgithub.com</td></tr>
+    <tr><td><code>*.atlassian.net</code></td><td>acme.atlassian.net</td><td>atlassian.net</td></tr>
+    <tr><td><code>docs.google.com</code></td><td>docs.google.com</td><td>drive.google.com</td></tr>
+    <tr><td><code>*zoom*</code></td><td>zoom.us, us02web.zoom.us</td><td>meet.google.com</td></tr>
+  </table>
+  <p><code>*</code> matches any run of characters and <code>?</code> matches exactly one. Matching ignores upper and lower case.</p>
+
+  <h3>Examples</h3>
+  <table>
+    <tr><th>Goal</th><th>Clicked in</th><th>Link host</th><th>Open in</th></tr>
+    <tr><td>Ask every time for Slack links</td><td>Slack</td><td></td><td>Show prompt</td></tr>
+    <tr><td>Work tools always in the work browser</td><td></td><td><code>*.atlassian.net</code></td><td>Work browser</td></tr>
+    <tr><td>YouTube always personal, even at work</td><td></td><td><code>youtube.com</code></td><td>Personal browser</td></tr>
+    <tr><td>GitHub from Slack in the work browser</td><td>Slack</td><td><code>github.com</code></td><td>Work browser</td></tr>
+  </table>
+  <p>With the first and last examples together, put “GitHub from Slack” <b>above</b> “Ask every time for Slack links”, or the Slack rule will match first.</p>
+
+  <div class="note"><b>About “Clicked in”:</b> BrowserSwitcher treats the app you're using when the link opens as the one it was clicked in. That's right for normal clicks, but links opened by apps running in the background may not match app rules.</div>
+
+  <h3>Finding an app's bundle ID</h3>
+  <p>Easiest: open the app, then pick it from the app menu next to <b>Clicked in</b>. Or run this in Terminal:</p>
+  <p><code>osascript -e 'id of app "Slack"'</code></p>
+</section>
+
+<section id="general">
+  <h2><span class="dot"></span>General</h2>
+  <div class="card"><dl>
+    <div><dt>Status</dt><dd>Whether BrowserSwitcher is your default browser. If not, use <b>Make Default Browser…</b> and confirm in the macOS dialog.</dd></div>
+    <div><dt>Launch at login</dt><dd>Starts BrowserSwitcher when you log in. macOS may ask you to allow it in System Settings → General → Login Items.</dd></div>
+    <div><dt>Version</dt><dd>The installed version.</dd></div>
+  </dl></div>
+</section>
+
+<section id="troubleshooting">
+  <h2><span class="dot"></span>Troubleshooting</h2>
+  <div class="card"><dl>
+    <div><dt>Links open in the wrong browser</dt><dd>Check the <b>General</b> tab says BrowserSwitcher is the default browser. Then check your work hours and days, and whether a rule higher in the list matches first.</dd></div>
+    <div><dt>Links open in the wrong Chrome profile</dt><dd>On the <b>Schedule</b> tab (or in the rule), choose the profile itself, such as <b>Google Chrome — Work</b>, not <b>Google Chrome — last-used profile</b>.</dd></div>
+    <div><dt>I can't see the menu-bar icon</dt><dd>It may be hidden behind the camera notch, or turned off in System Settings → Menu Bar. Opening BrowserSwitcher from Applications always opens Settings.</dd></div>
+    <div><dt>Holding Fn doesn't show the prompt</dt><dd>Some keyboards don't report Fn. Pick another key on the <b>Prompt</b> tab.</dd></div>
+    <div><dt>A Slack rule doesn't match</dt><dd>Check the bundle ID with the app menu next to <b>Clicked in</b>. Test with a real link in Slack, not <b>Test Link</b>.</dd></div>
+    <div><dt>I want to stop using BrowserSwitcher</dt><dd>Choose another default browser in System Settings → Desktop &amp; Dock → Default web browser, then quit BrowserSwitcher.</dd></div>
+  </dl></div>
+</section>
+
+</body>
+</html>
